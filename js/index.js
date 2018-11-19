@@ -1,31 +1,13 @@
 // Write your JS here
 import test from './script2.js';
 
-console.log('test');
+var database = firebase.database();
+var databaseRef = database.ref("/");
 
-test();
-
-function appendImageToBody(srcURL) {
-    // write a function that will append an <img> to the body with the
-    // URL provided in the parameters
-    $('#here').append('<img src=' + srcURL + '>');
-}
-function callGiphyAPIWithSearchTerm(searchTerm) {
-  var newUrl= "https://api.giphy.com/v1/stickers/search?q=" + searchTerm + "&api_key=AIzaSyBLuDHEdEXQ08sZMu11xbaP6JJQsF4TaZg";
-    $.ajax({
-      url: newUrl,
-      method: "GET",
-      success: function(response) {
-        
-        for(var i=0;i < response.data.length ; i++){
-          var url = response.data[i].images.original.url;
-          appendImageToBody(url);
-          
-           
-        }
-       
-      console.log(response);
-      console.log(response.data.length);
-      },
-    }); 
-}
+// Read the data from the database and take a snapshot of that data.
+databaseRef.once("value").then(function(snapshot) {
+ // Use .val() to get the data from the snapshot.
+ const directory = snapshot.val();
+ console.log(directory[0].Age);
+ $("body").append(directory[0].Age)
+});
