@@ -8,6 +8,22 @@ var databaseRef = database.ref("/");
 databaseRef.once("value").then(function(snapshot) {
  // Use .val() to get the data from the snapshot.
  const directory = snapshot.val();
- console.log(directory[0].Age);
- $("body").append(directory[0].Age)
+ console.log(directory);
+ $("body").append(directory)
+    for(var key in directory){
+        console.log(key);
+        console.log(directory[key].age);
+        $("body").append(directory[key].age);
+    }
+    
 });
+$("#submit").click(function(){
+        //$("#age").val()
+        databaseRef.push({
+            age:$("#age").val(),
+            cuntry:$("#cuntry").val(),
+            story:$("#story").val(),
+            title:$("#title").val()
+        })
+}   
+    );
