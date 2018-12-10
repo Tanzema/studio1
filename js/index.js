@@ -5,7 +5,6 @@ var database = firebase.database();
 var databaseRef = database.ref("/");
 {/* <div class="col-lg-4 col-sm-6 portfolio-item">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="#">Project One</a>
@@ -27,10 +26,37 @@ databaseRef.once("value").then(function(snapshot) {
         var title = directory[key].title
         var story = directory[key].story
         var country = directory[key].country
-        var div = $("<div>").text("age: " + age + " country: " + country + " title: " + title + " story: " + story );
-        $("#stories").append(div);
+       // var div = $("<div>").text(" age: " + age + " country: " + country + " title: " + title + " story: " + story );
+      //  $("#stories").append(div);
+        var outerdiv = $("<div class='col-lg-4 col-sm-6 portfolio-item'>");
+        var carddiv = $("<div class='card h-100'>");
+        var bodydiv = $("<div class='card-body'>");
+        var titleh4 = $("<h4 class= 'card-title'>").text(title);
+        var storyp = $("<p class='card-text'>").text(story);
+        bodydiv.append(titleh4, storyp);
+        carddiv.append(bodydiv);
+        outerdiv.append(carddiv);
+        $("#stories").append(outerdiv);
     }
-    
+    for(var key in directory){
+      console.log(key);
+      console.log(directory[key].age);
+      var age = directory[key].age
+      var title = directory[key].title
+      var story = directory[key].story
+      var country = directory[key].country
+     // var div = $("<div>").text(" age: " + age + " country: " + country + " title: " + title + " story: " + story );
+    //  $("#stories").append(div);
+      var outerdiv = $("<div class='col-lg-4 col-sm-6 portfolio-item'>");
+      var carddiv = $("<div class='card h-100'>");
+      var bodydiv = $("<div class='card-body'>");
+      var titleh4 = $("<h4 class= 'card-title'>").text(title);
+      var storyp = $("<p class='card-text'>").text(story);
+      bodydiv.append(titleh4, storyp);
+      carddiv.append(bodydiv);
+      outerdiv.append(carddiv);
+      $("#stories").append(outerdiv);
+  }
 });
 $("#submit").click(function(){
         //$("#age").val()
@@ -42,3 +68,4 @@ $("#submit").click(function(){
         })
 }   
     );
+
